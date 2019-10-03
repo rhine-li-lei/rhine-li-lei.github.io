@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    Android系列学习 |
+    
+    rhine(黎磊)</title>
+  
+    <link rel="shortcut icon" href="/images/ProfilePicture.jpg">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  
+  <script src="/js/pace.min.js"></script>
+</head>
+</html>
+<body>
+<main class="content">
+  <section class="outer">
+  
+
+<article id="post-Android系列学习" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android系列学习
+    </h1>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/10/03/Android系列学习/" class="article-date">
+  <time datetime="2019-10-03T13:58:01.000Z" itemprop="datePublished">2019-10-03</time>
+</a>
+        
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Android系列/">Android系列</a>
+  </div>
+
+      </div>
+    
+
+    
+      
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <blockquote>
+<p>版权声明： 本站所有博文内容均为原创，转载请务必注明作者与原文链接，且不得篡改原文内容。</p>
+</blockquote>
+<h1 id="Android-系统"><a href="#Android-系统" class="headerlink" title="Android 系统"></a>Android 系统</h1><p><img src="https://upload-images.jianshu.io/upload_images/3998756-fbec9f7f3d060abd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="platform_architecture"></p>
+<p>从这张图里面我们能清楚知道每一层的作用，本博客主要在 Framework 和 Native、Android Runtime 两层作讲解。</p>
+<h2 id="Framework"><a href="#Framework" class="headerlink" title="Framework"></a>Framework</h2><p>Framework 通过使用Java语言编写的API，您可以使用Android OS的整个功能集。 这些API通过简化核心，模块化系统组件和服务的重用，构成了创建Android应用所需的构建块，其中包括：</p>
+<ul>
+<li>丰富而可扩展的View System</li>
+<li>Resource Manager</li>
+<li>Notification Manager</li>
+<li>Activity Manager</li>
+<li>Content Providers</li>
+</ul>
+<h2 id="Native-C-C-Libraries"><a href="#Native-C-C-Libraries" class="headerlink" title="Native C/C++ Libraries"></a>Native C/C++ Libraries</h2><p>许多核心的Android系统组件和服务（例如ART和HAL）都是根据需要使用C和C ++编写的本机库的本机代码构建的。 Android平台提供了Java框架API，以将某些本机库的功能公开给应用程序。 </p>
+<p>如果您要开发需要C或C ++代码的应用程序，则可以使用Android NDK直接从您的本机代码访问其中一些本机平台库。</p>
+<h2 id="Android-Runtime"><a href="#Android-Runtime" class="headerlink" title="Android Runtime"></a>Android Runtime</h2><p>对于运行Android 5.0版（API级别21）或更高版本的设备，每个应用程序都以自己的进程运行，并带有自己的Android运行时（ART）实例。 通过执行DEX文件（一种专门为Android设计的字节码格式，已针对最小的内存占用空间进行了优化），ART可以在低内存设备上运行多个虚拟机。 构建工具链（例如Jack）将Java源代码编译为DEX字节码，该代码可在Android平台上运行。</p>
+<p>对于这一部分讲解主要会停留在虚拟机概念上。</p>
+<h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><p>这是一篇立flag的文章，自己想在这两层做源码分析，这将是整个文章的目录。</p>
+<h2 id="通信方式"><a href="#通信方式" class="headerlink" title="通信方式"></a>通信方式</h2><p>Android 是基于 Linux 开发，进程间、线程间的通信必不可少，其中进程间的通信方式主要有</p>
+<ul>
+<li>文件</li>
+<li>AIDL（基于binder）</li>
+<li>Binder</li>
+<li>Messenger（基于binder）</li>
+<li>ContentProvider（基于binder）</li>
+<li>socket<br>而线程间进程通信呢，主要就是Handler，整个Android的消息机制都是建立在Handler上的。</li>
+</ul>
+<h2 id="Android-进程"><a href="#Android-进程" class="headerlink" title="Android 进程"></a>Android 进程</h2><p>Android 系统启动过程就是由Boot loader引导开机，以此进入 内核， Native，Framework，App</p>
+<h2 id="系统稳定性"><a href="#系统稳定性" class="headerlink" title="系统稳定性"></a>系统稳定性</h2><p>系统稳定性主要分为超时(timeout)和异常崩溃(crash)。</p>
+<h2 id="系统组件"><a href="#系统组件" class="headerlink" title="系统组件"></a>系统组件</h2><p>对于Android来说，最为著名的就是四大组件，Activity、Service、Broadcast Receiver、ContentProvider；这四大部分的源码对于Android工程师来说应该是最为手到擒来的了。</p>
+<h2 id="系统服务"><a href="#系统服务" class="headerlink" title="系统服务"></a>系统服务</h2><p>AMS、PMS 、WMS等系统服务作为我们最为熟知的系统服务他是怎么工作的，了解一下？</p>
+<h2 id="虚拟机"><a href="#虚拟机" class="headerlink" title="虚拟机"></a>虚拟机</h2><p>如何在 Android 平台上跑Java 代码呢？虚拟机扮演着十分重要的角色，5.0之前是 Dalvik虚拟机，之后是Android Runtime(ART)虚拟机，原理了解下？</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/10/03/Android系列学习/" data-id="ck1armd3p0000ysvzmlnem4ar"
+         class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Framework/">Framework</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+    
+      <a href="/2018/11/15/View的事件分发拦截机制/" class="article-nav-link">
+        <strong class="article-nav-caption">Olde posts</strong>
+        <div class="article-nav-title">View 的事件分发拦截机制</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  <div class="gitalk" id="gitalk-container"></div>
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+    var gitalk = new Gitalk({
+      clientID: '7fe0aa956b684f67dc71',
+      clientSecret: '6d1c739bf59040f4fa8b09bf4bebcfa7ed9d1cea',
+      repo: 'rhine-li-lei.github.io',
+      owner: 'rhine-li-lei',
+      admin: ['rhine-li-lei'],
+      // id: location.pathname,      // Ensure uniqueness and length less than 50
+      id: md5(location.pathname),
+      distractionFreeMode: false,  // Facebook-like distraction free mode
+      pagerDirection: 'last'
+    })
+
+  gitalk.render('gitalk-container')
+  </script>
+
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2019 rhine(黎磊)</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+
+</main>
+
+<aside class="sidebar sidebar-specter">
+  
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/ProfilePicture.jpg" alt="rhine(黎磊)"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">主页</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">归档</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/gallery">相册</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">关于</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+  <script src="/js/tocbot.min.js"></script>
+  <script>
+    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+    tocbot.init({
+      tocSelector: '.tocbot',
+      contentSelector: '.article-entry',
+      headingSelector: 'h1, h2, h3, h4, h5, h6',
+      hasInnerContainers: true,
+      scrollSmooth: true,
+      positionFixedSelector: '.tocbot',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  </script>
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+</html>
