@@ -82,7 +82,7 @@
 <li>ACTION_MOVE：手指在屏幕上移动时候产生该事件</li>
 <li>ACTION_UP：手指从屏幕上松开的瞬间产生该事件</li>
 </ol>
-<p>要要注意触摸事件不是独立的，而是成组的，每一组事件都是由按下事件开始的，由抬起事件或者取消事件结束。我们把<strong>由 ACTION_DOWN 开始（按下），ACTION_UP （抬起）或者 ACTION_CANCEL（取消） 结束</strong>的一组事件称为<strong>事件序列</strong>或者说<strong>事件流</strong>。取消事件是一种特殊的事件，它对应的是事件序列非人为的提前结束。</p>
+<p>要要注意触摸事件不是独立的，而是成组的，每一组事件都是由按下事件开始的，由抬起事件或者取消事件结束。我们把<strong>由 ACTION_DOWN 开始（按下），ACTION_UP （抬起）或者 ACTION_CANCEL（取消） 结束</strong>的一组事件称为<strong>事件序列</strong>或者说<strong>事件流</strong>。取消事件是一种特殊的事件，它对应的是事件序列非人为的提前结束。<br><a id="more"></a></p>
 <p>举个例子：<br>点击事件：ACTION_DOWN  -&gt; ACTION_UP<br>滑动事件：ACTION_DOWN  -&gt;  ACTION_MOVE -&gt; … -&gt; ACTION_MOVE -&gt; ACTION_UP </p>
 <p>Android 每产生一个 TouchEvent 事件，他会先问最表面是否消费，如果不消费就交给他的ViewGroup，一层一层向上传递，最终被<strong>消费</strong>掉（消费就是以为着事件被处理了，代码体现为返回值，true为消费，false为不消费，<strong>消费后不再传递</strong>）。TouchEvent 不断产生，事件就会不断分发，处理，实现对事件对应的操作进行判断和反馈处理。</p>
 <p>还是举个栗子：<br>一个button被点击一下，就会产生两个 TouchEvent 事件，当第一个 TouchEvent 产生，button 发现自己被按下，背景风格变成按下状态，如水波纹、颜色变深等。当第二个Up 的 TouchEvent 产生、分发的时候，button判别自己被点击，背景风格恢复默认状态，并且如果设置了<code>ClickListener</code>的话，调用 <code>OnClick</code> 方法。</p>
@@ -181,7 +181,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/03/View的事件分发拦截机制/" data-id="ck1aha3e90001osvzg39xc5pm"
+      <a data-url="http://yoursite.com/2019/10/03/View的事件分发拦截机制/" data-id="ck1ahcf3y0006d0vza9iphef1"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Framework/">Framework</a></li></ul>
