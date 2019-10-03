@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-10-02T13:56:15.758Z</updated>
+  <updated>2019-10-03T09:11:53.759Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,27 +15,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="http://yoursite.com/2019/10/02/hello-world/"/>
-    <id>http://yoursite.com/2019/10/02/hello-world/</id>
-    <published>2019-10-02T05:14:00.000Z</published>
-    <updated>2019-10-02T13:56:15.758Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;GitHub&lt;/a&gt;.&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="Hexo" scheme="http://yoursite.com/categories/Hexo/"/>
-    
-    
-      <category term="hexo" scheme="http://yoursite.com/tags/hexo/"/>
-    
-  </entry>
   
   <entry>
     <title>View 的事件分发拦截机制</title>
@@ -73,18 +52,14 @@
     <link href="http://yoursite.com/2018/07/26/Android%E7%9A%84%E6%B6%88%E6%81%AF%E6%9C%BA%E5%88%B6-Handler/"/>
     <id>http://yoursite.com/2018/07/26/Android的消息机制-Handler/</id>
     <published>2018-07-25T17:41:19.000Z</published>
-    <updated>2019-10-03T09:12:37.639Z</updated>
+    <updated>2019-10-03T09:15:35.836Z</updated>
     
     <summary type="html">
     
       &lt;p&gt;为了更好的理解 Looper 的工作原理，我们需要对 ThreadLocal 进行了解，如果对 ThreadLocal 没有了解的童鞋，可以参看  &lt;a href=&quot;https://www.jianshu.com/p/0ba78fe61c40&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;ThreadLocal 原理&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h1&gt;&lt;p&gt;  一句话原理：&lt;strong&gt;共享内存&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;  Handler 作为日常开发的必备，不可避免就要涉及这方面的知识。从开发者角度来说，&lt;strong&gt;Handler 是 Android 消息机制的上层接口&lt;/strong&gt;，使得开发的时只需与 Handler 交互即可。Handler 使用也很简单，&lt;strong&gt;能够轻松将一个任务切换到 Handler 所在的线程中执行&lt;/strong&gt;。&lt;/p&gt;
-&lt;p&gt;很多人认为Handler的作用就是更新UI，的确没错，但是更新UI仅仅是Handler的一个特殊的使用场景。具体来说，就是有时候需要在子线程做一些耗时操作，比如说访问网络或者耗时的I/O操作，当这些耗时操作完成时，程序的UI进行相应的改变。由于安卓开发规范的限制，我们不能在子线程中访问UI控件，因为UI的控件是线程非安全的，这个时候通过Handler就可以将更新UI的操作切换到主线程中执行。&lt;/p&gt;
-&lt;p&gt;Android 的消息机制主要是指 Handler 的运行机制。事实上，Handler，Looper，MessageQueue 是一套运行体制而出现的，&lt;strong&gt;MessageQueue&lt;/strong&gt; 是一个消息队列，&lt;strong&gt;以队列形式提供插入和删除，主要用于消息的存储，内部实现是采用单链表的形式来组织 Message。&lt;/strong&gt;而 &lt;strong&gt;Looper 用于处理消息&lt;/strong&gt;，Looper 内部会以无限循环去查是否有新的 Message ，有则处理，没有就等待。需要特殊说明的是，Looper 内部是使用 ThreadLocal 实现的，由于ThreadLocal 可以在每一个线程中互不干扰的存取数据，所以通过ThreadLocal 就可以轻松获取每个线程的 Looper。&lt;/p&gt;
-&lt;p&gt;Message ：android.os.Message是定义一个Messge包含必要的描述和属性数据，并且此对象可以被发送给android.os.Handler处理。属性字段：arg1、arg2、what、obj、replyTo等；其中arg1和arg2是用来存放整型数据的；what是用来保存消息标示的；obj是Object类型的任意对象；replyTo是消息管理器，会关联到一个handler，handler就是处理其中的消息。通常对Message对象不是直接new出来的，只要调用handler中的obtainMessage方法来直接获得Message对象。&lt;/p&gt;
-&lt;p&gt;需要特殊说明的是，&lt;strong&gt;线程是默认没有 Looper 的&lt;/strong&gt;，如果需要使用 Handler 就必须为线程创建Looper，但是APP 的主线程中，即 ActivityThread ，在主线程被创建的时候就会初始化 Looper。另外，在没有Looper 的线程创建 Handler 也会失败。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://upload-images.jianshu.io/upload_images/3998756-3adfd5910e1e6f84.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt=&quot;Handler 工作过程&quot;&gt;&lt;br&gt;&lt;img src=&quot;https://upload-images.jianshu.io/upload_images/3998756-96c14e3433511788.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt=&quot;Hnadler 的工作流程&quot;&gt;&lt;br&gt;
+&lt;p&gt;很多人认为Handler的作用就是更新UI，的确没错，但是更新UI仅仅是Handler的一个特殊的使用场景。具体来说，就是有时候需要在子线程做一些耗时操作，比如说访问网络或者耗时的I/O操作，当这些耗时操作完成时，程序的UI进行相应的改变。由于安卓开发规范的限制，我们不能在子线程中访问UI控件，因为UI的控件是线程非安全的，这个时候通过Handler就可以将更新UI的操作切换到主线程中执行。&lt;br&gt;
     
     </summary>
     

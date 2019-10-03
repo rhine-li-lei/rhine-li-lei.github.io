@@ -59,74 +59,6 @@
       
         
 
-<article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2019/10/02/hello-world/">Hello World</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2019/10/02/hello-world/" class="article-date">
-  <time datetime="2019-10-02T05:14:00.000Z" itemprop="datePublished">2019-10-02</time>
-</a>
-        
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Hexo/">Hexo</a>
-  </div>
-
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.<br>
-        
-          <a class="article-more-link" href="/2019/10/02/hello-world/">Read More...</a>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/02/hello-world/" data-id="ck1aheq0f00027cvzlb5dtv1u"
-         class="article-share-link">Share</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        
-
 <article id="post-View的事件分发拦截机制" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -183,7 +115,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/11/15/View的事件分发拦截机制/" data-id="ck1aheq0m00067cvzgt11tps7"
+      <a data-url="http://yoursite.com/2018/11/15/View的事件分发拦截机制/" data-id="ck1ahj2kf000268vz9qyqh1av"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Framework/">Framework</a></li></ul>
@@ -247,18 +179,14 @@
         <p>为了更好的理解 Looper 的工作原理，我们需要对 ThreadLocal 进行了解，如果对 ThreadLocal 没有了解的童鞋，可以参看  <a href="https://www.jianshu.com/p/0ba78fe61c40" target="_blank" rel="noopener">ThreadLocal 原理</a></p>
 <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>  一句话原理：<strong>共享内存</strong></p>
 <p>  Handler 作为日常开发的必备，不可避免就要涉及这方面的知识。从开发者角度来说，<strong>Handler 是 Android 消息机制的上层接口</strong>，使得开发的时只需与 Handler 交互即可。Handler 使用也很简单，<strong>能够轻松将一个任务切换到 Handler 所在的线程中执行</strong>。</p>
-<p>很多人认为Handler的作用就是更新UI，的确没错，但是更新UI仅仅是Handler的一个特殊的使用场景。具体来说，就是有时候需要在子线程做一些耗时操作，比如说访问网络或者耗时的I/O操作，当这些耗时操作完成时，程序的UI进行相应的改变。由于安卓开发规范的限制，我们不能在子线程中访问UI控件，因为UI的控件是线程非安全的，这个时候通过Handler就可以将更新UI的操作切换到主线程中执行。</p>
-<p>Android 的消息机制主要是指 Handler 的运行机制。事实上，Handler，Looper，MessageQueue 是一套运行体制而出现的，<strong>MessageQueue</strong> 是一个消息队列，<strong>以队列形式提供插入和删除，主要用于消息的存储，内部实现是采用单链表的形式来组织 Message。</strong>而 <strong>Looper 用于处理消息</strong>，Looper 内部会以无限循环去查是否有新的 Message ，有则处理，没有就等待。需要特殊说明的是，Looper 内部是使用 ThreadLocal 实现的，由于ThreadLocal 可以在每一个线程中互不干扰的存取数据，所以通过ThreadLocal 就可以轻松获取每个线程的 Looper。</p>
-<p>Message ：android.os.Message是定义一个Messge包含必要的描述和属性数据，并且此对象可以被发送给android.os.Handler处理。属性字段：arg1、arg2、what、obj、replyTo等；其中arg1和arg2是用来存放整型数据的；what是用来保存消息标示的；obj是Object类型的任意对象；replyTo是消息管理器，会关联到一个handler，handler就是处理其中的消息。通常对Message对象不是直接new出来的，只要调用handler中的obtainMessage方法来直接获得Message对象。</p>
-<p>需要特殊说明的是，<strong>线程是默认没有 Looper 的</strong>，如果需要使用 Handler 就必须为线程创建Looper，但是APP 的主线程中，即 ActivityThread ，在主线程被创建的时候就会初始化 Looper。另外，在没有Looper 的线程创建 Handler 也会失败。</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/3998756-3adfd5910e1e6f84.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Handler 工作过程"><br><img src="https://upload-images.jianshu.io/upload_images/3998756-96c14e3433511788.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Hnadler 的工作流程"><br>
+<p>很多人认为Handler的作用就是更新UI，的确没错，但是更新UI仅仅是Handler的一个特殊的使用场景。具体来说，就是有时候需要在子线程做一些耗时操作，比如说访问网络或者耗时的I/O操作，当这些耗时操作完成时，程序的UI进行相应的改变。由于安卓开发规范的限制，我们不能在子线程中访问UI控件，因为UI的控件是线程非安全的，这个时候通过Handler就可以将更新UI的操作切换到主线程中执行。<br>
         
           <a class="article-more-link" href="/2018/07/26/Android的消息机制-Handler/">Read More...</a>
         
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/26/Android的消息机制-Handler/" data-id="ck1aheq29000p7cvzx9ozqtpf"
+      <a data-url="http://yoursite.com/2018/07/26/Android的消息机制-Handler/" data-id="ck1ahj2m5000k68vzuqfmazfs"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Framework/">Framework</a></li></ul>
@@ -327,7 +255,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/24/ThreadLocal原理/" data-id="ck1aheq0500007cvzkjphus8m"
+      <a data-url="http://yoursite.com/2018/07/24/ThreadLocal原理/" data-id="ck1ahj2k8000068vz9gvtkbfw"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ThreadLocal/">ThreadLocal</a></li></ul>
