@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-10-07T13:52:01.436Z</updated>
+  <updated>2019-10-07T13:58:25.306Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,19 +21,19 @@
     <link href="http://yoursite.com/2019/10/07/View%E7%9A%84%E7%BB%98%E5%88%B6%E6%B5%81%E7%A8%8B/"/>
     <id>http://yoursite.com/2019/10/07/View的绘制流程/</id>
     <published>2019-10-07T13:51:05.000Z</published>
-    <updated>2019-10-07T13:52:01.436Z</updated>
+    <updated>2019-10-07T13:58:25.306Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;p&gt;View 的绘制流程是 Android 开发的必备知识点之一&lt;/p&gt;
+      &lt;p&gt;View 的绘制流程是 Android 开发的必备知识点之一&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;API：26&lt;/strong&gt;&lt;/p&gt;
-&lt;h1 id=&quot;View-树&quot;&gt;&lt;a href=&quot;#View-树&quot; class=&quot;headerlink&quot; title=&quot;View
-        
-      
+&lt;h1 id=&quot;View-树&quot;&gt;&lt;a href=&quot;#View-树&quot; class=&quot;headerlink&quot; title=&quot;View 树&quot;&gt;&lt;/a&gt;View 树&lt;/h1&gt;&lt;p&gt;因为这不是重点，所以介绍得比较简单，下次写文章详细讲解View树的形成与关系。&lt;/p&gt;
+&lt;p&gt;一个 Activity 会形成一棵&lt;strong&gt;以 ViewRoot 为根节点的 View 树&lt;/strong&gt;。&lt;br&gt;&lt;img src=&quot;https://upload-images.jianshu.io/upload_images/3998756-be6619b04185089e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt=&quot;View树.png&quot;&gt;&lt;br&gt;ViewRoot 的实现类就是 ViewGroupImlp，这棵树形成流程为：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Activity onCreate setContentView()  的时候解析后形成以 DecorView 为根节点的 View 树&lt;/li&gt;
+&lt;li&gt;Activity 启动的最后在 WindowManagerGlobal 生成 ViewRootImpl 并将之与DecorView绑定在一起&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;那问题来了，ViewRoot 不是 View 啊，怎么形成的树呢，实际上 ViewRootImpl 和 ViewGroup 都实现了 ViewParent 接口，View 有一个 mParent 字段存储父节点。&lt;br&gt;&lt;img src=&quot;https://upload-images.jianshu.io/upload_images/3998756-c1b5e745b6dfe891.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&quot; alt&gt;&lt;br&gt;
     
     </summary>
     
@@ -52,7 +52,7 @@
     <link href="http://yoursite.com/2019/10/03/Android%E7%B3%BB%E5%88%97%E5%AD%A6%E4%B9%A0/"/>
     <id>http://yoursite.com/2019/10/03/Android系列学习/</id>
     <published>2019-10-03T13:58:01.000Z</published>
-    <updated>2019-10-03T13:58:29.548Z</updated>
+    <updated>2019-10-07T13:57:54.678Z</updated>
     
     <summary type="html">
     
