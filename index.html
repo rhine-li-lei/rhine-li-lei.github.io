@@ -109,38 +109,13 @@
 </blockquote>
 <h1 id="Android-系统"><a href="#Android-系统" class="headerlink" title="Android 系统"></a>Android 系统</h1><p><img src="https://upload-images.jianshu.io/upload_images/3998756-fbec9f7f3d060abd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="platform_architecture"></p>
 <p>从这张图里面我们能清楚知道每一层的作用，本博客主要在 Framework 和 Native、Android Runtime 两层作讲解。</p>
-<h2 id="Framework"><a href="#Framework" class="headerlink" title="Framework"></a>Framework</h2><p>Framework 通过使用Java语言编写的API，您可以使用Android OS的整个功能集。 这些API通过简化核心，模块化系统组件和服务的重用，构成了创建Android应用所需的构建块，其中包括：</p>
-<ul>
-<li>丰富而可扩展的View System</li>
-<li>Resource Manager</li>
-<li>Notification Manager</li>
-<li>Activity Manager</li>
-<li>Content Providers</li>
-</ul>
-<h2 id="Native-C-C-Libraries"><a href="#Native-C-C-Libraries" class="headerlink" title="Native C/C++ Libraries"></a>Native C/C++ Libraries</h2><p>许多核心的Android系统组件和服务（例如ART和HAL）都是根据需要使用C和C ++编写的本机库的本机代码构建的。 Android平台提供了Java框架API，以将某些本机库的功能公开给应用程序。 </p>
-<p>如果您要开发需要C或C ++代码的应用程序，则可以使用Android NDK直接从您的本机代码访问其中一些本机平台库。</p>
-<h2 id="Android-Runtime"><a href="#Android-Runtime" class="headerlink" title="Android Runtime"></a>Android Runtime</h2><p>对于运行Android 5.0版（API级别21）或更高版本的设备，每个应用程序都以自己的进程运行，并带有自己的Android运行时（ART）实例。 通过执行DEX文件（一种专门为Android设计的字节码格式，已针对最小的内存占用空间进行了优化），ART可以在低内存设备上运行多个虚拟机。 构建工具链（例如Jack）将Java源代码编译为DEX字节码，该代码可在Android平台上运行。</p>
-<p>对于这一部分讲解主要会停留在虚拟机概念上。</p>
-<h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><p>这是一篇立flag的文章，自己想在这两层做源码分析，这将是整个文章的目录。</p>
-<h2 id="通信方式"><a href="#通信方式" class="headerlink" title="通信方式"></a>通信方式</h2><p>Android 是基于 Linux 开发，进程间、线程间的通信必不可少，其中进程间的通信方式主要有</p>
-<ul>
-<li>文件</li>
-<li>AIDL（基于binder）</li>
-<li>Binder</li>
-<li>Messenger（基于binder）</li>
-<li>ContentProvider（基于binder）</li>
-<li>socket<br>而线程间进程通信呢，主要就是Handler，整个Android的消息机制都是建立在Handler上的。</li>
-</ul>
-<h2 id="Android-进程"><a href="#Android-进程" class="headerlink" title="Android 进程"></a>Android 进程</h2><p>Android 系统启动过程就是由Boot loader引导开机，以此进入 内核， Native，Framework，App</p>
-<h2 id="系统稳定性"><a href="#系统稳定性" class="headerlink" title="系统稳定性"></a>系统稳定性</h2><p>系统稳定性主要分为超时(timeout)和异常崩溃(crash)。</p>
-<h2 id="系统组件"><a href="#系统组件" class="headerlink" title="系统组件"></a>系统组件</h2><p>对于Android来说，最为著名的就是四大组件，Activity、Service、Broadcast Receiver、ContentProvider；这四大部分的源码对于Android工程师来说应该是最为手到擒来的了。</p>
-<h2 id="系统服务"><a href="#系统服务" class="headerlink" title="系统服务"></a>系统服务</h2><p>AMS、PMS 、WMS等系统服务作为我们最为熟知的系统服务他是怎么工作的，了解一下？</p>
-<h2 id="虚拟机"><a href="#虚拟机" class="headerlink" title="虚拟机"></a>虚拟机</h2><p>如何在 Android 平台上跑Java 代码呢？虚拟机扮演着十分重要的角色，5.0之前是 Dalvik虚拟机，之后是Android Runtime(ART)虚拟机，原理了解下？</p>
-
+        
+          <a class="article-more-link" href="/2019/10/03/Android系列学习/">Read More...</a>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/03/Android系列学习/" data-id="ck1ghejbt0001jkvz4xi7no5e"
+      <a data-url="http://yoursite.com/2019/10/03/Android系列学习/" data-id="ck1ghg044000074vzieyn15ec"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Framework/">Framework</a></li></ul>
@@ -207,16 +182,14 @@
 <p>一个 Activity 会形成一棵<strong>以 ViewRoot 为根节点的 View 树</strong>。<br><img src="https://upload-images.jianshu.io/upload_images/3998756-be6619b04185089e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="View树.png"><br>ViewRoot 的实现类就是 ViewGroupImlp，这棵树形成流程为：</p>
 <ul>
 <li>Activity onCreate setContentView()  的时候解析后形成以 DecorView 为根节点的 View 树</li>
-<li>Activity 启动的最后在 WindowManagerGlobal 生成 ViewRootImpl 并将之与DecorView绑定在一起</li>
-</ul>
-<p>那问题来了，ViewRoot 不是 View 啊，怎么形成的树呢，实际上 ViewRootImpl 和 ViewGroup 都实现了 ViewParent 接口，View 有一个 mParent 字段存储父节点。<br><img src="https://upload-images.jianshu.io/upload_images/3998756-c1b5e745b6dfe891.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt><br>
+<li>Activity 启动的最后在 WindowManagerGlobal 生成 ViewRootImpl 并将之与DecorView绑定在一起
         
           <a class="article-more-link" href="/2019/10/07/View的绘制流程/">Read More...</a>
         
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/07/View的绘制流程/" data-id="ck1ghejc90009jkvztuthn79i"
+      <a data-url="http://yoursite.com/2019/10/07/View的绘制流程/" data-id="ck1ghg04c000274vzubunrjmp"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Framework/">Framework</a></li></ul>
@@ -292,7 +265,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/11/15/View的事件分发拦截机制/" data-id="ck1ghejc60007jkvzlzm2e0fw"
+      <a data-url="http://yoursite.com/2018/11/15/View的事件分发拦截机制/" data-id="ck1ghg04n000874vzk5s9soap"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Framework/">Framework</a></li></ul>
@@ -363,7 +336,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/26/Android的消息机制-Handler/" data-id="ck1ghejdy000wjkvz3v8lwovb"
+      <a data-url="http://yoursite.com/2018/07/26/Android的消息机制-Handler/" data-id="ck1ghg06b000w74vzf7dn57no"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Framework/">Framework</a></li></ul>
@@ -432,7 +405,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/24/ThreadLocal原理/" data-id="ck1ghejbz0003jkvzjm7x2p6j"
+      <a data-url="http://yoursite.com/2018/07/24/ThreadLocal原理/" data-id="ck1ghg04k000674vzoptqjm33"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ThreadLocal/">ThreadLocal</a></li></ul>

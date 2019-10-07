@@ -80,9 +80,9 @@
 <p>一个 Activity 会形成一棵<strong>以 ViewRoot 为根节点的 View 树</strong>。<br><img src="https://upload-images.jianshu.io/upload_images/3998756-be6619b04185089e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="View树.png"><br>ViewRoot 的实现类就是 ViewGroupImlp，这棵树形成流程为：</p>
 <ul>
 <li>Activity onCreate setContentView()  的时候解析后形成以 DecorView 为根节点的 View 树</li>
-<li>Activity 启动的最后在 WindowManagerGlobal 生成 ViewRootImpl 并将之与DecorView绑定在一起</li>
+<li>Activity 启动的最后在 WindowManagerGlobal 生成 ViewRootImpl 并将之与DecorView绑定在一起<a id="more"></a>
+那问题来了，ViewRoot 不是 View 啊，怎么形成的树呢，实际上 ViewRootImpl 和 ViewGroup 都实现了 ViewParent 接口，View 有一个 mParent 字段存储父节点。<br><img src="https://upload-images.jianshu.io/upload_images/3998756-c1b5e745b6dfe891.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt></li>
 </ul>
-<p>那问题来了，ViewRoot 不是 View 啊，怎么形成的树呢，实际上 ViewRootImpl 和 ViewGroup 都实现了 ViewParent 接口，View 有一个 mParent 字段存储父节点。<br><img src="https://upload-images.jianshu.io/upload_images/3998756-c1b5e745b6dfe891.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt><br><a id="more"></a></p>
 <h1 id="过程简介"><a href="#过程简介" class="headerlink" title="过程简介"></a>过程简介</h1><p>View的绘制流程的起点是 DecorView 的 performTraversals() 方法开始的，顺着 View 树进行分发，而每一个View 经过 measure、layout、draw 后就被展示出来，其中，<strong>measure 是测量View的宽高，layout是确定在父View 中的位置，draw是将View绘制在屏幕上</strong>。<br><img src="https://upload-images.jianshu.io/upload_images/3998756-20b3397fdfcc0d5c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="View的绘制流程.png"></p>
 <p>从流程图上可知：</p>
 <ul>
@@ -198,7 +198,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/07/View的绘制流程/" data-id="ck1ghejc90009jkvztuthn79i"
+      <a data-url="http://yoursite.com/2019/10/07/View的绘制流程/" data-id="ck1ghg04c000274vzubunrjmp"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Framework/">Framework</a></li></ul>
