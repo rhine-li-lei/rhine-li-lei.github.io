@@ -77,7 +77,7 @@
         <p>View 的绘制流程是 Android 开发的必备知识点之一</p>
 <p><strong>API：26</strong></p>
 <h1 id="View-树"><a href="#View-树" class="headerlink" title="View 树"></a>View 树</h1><p>因为这不是重点，所以介绍得比较简单，下次写文章详细讲解View树的形成与关系。</p>
-<p>一个 Activity 会形成一棵<strong>以 ViewRoot 为根节点的 View 树</strong>。<br><img src="https://upload-images.jianshu.io/upload_images/3998756-be6619b04185089e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="View树.png"><br>ViewRoot 的实现类就是 ViewGroupImlp，这棵树形成流程为：</p>
+<p>一个 Activity 会形成一棵<strong>以 ViewRoot 为根节点的 View 树</strong>。<br><img src="https://upload-images.jianshu.io/upload_images/3998756-be6619b04185089e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="View树.png"><br>ViewRoot 的实现类就是 ViewRootImlp，这棵树形成流程为：</p>
 <ul>
 <li>Activity onCreate setContentView()  的时候解析后形成以 DecorView 为根节点的 View 树</li>
 <li>Activity 启动的最后在 WindowManagerGlobal 生成 ViewRootImpl 并将之与DecorView绑定在一起<a id="more"></a>
@@ -198,7 +198,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/07/View的绘制流程/" data-id="ck1ghjcqk0002a0vz2ukhczkk"
+      <a data-url="http://yoursite.com/2019/10/07/View的绘制流程/" data-id="ck1gi99rj0008wkvz0qcqxadh"
          class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Framework/">Framework</a></li></ul>
