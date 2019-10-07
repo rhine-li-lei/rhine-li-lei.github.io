@@ -7,6 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>
+    View的绘制流程 |
     
     rhine(黎磊)</title>
   
@@ -21,43 +22,8 @@
 </html>
 <body>
 <main class="content">
-  <section class="jumbotron">
-  <div class="video">
-    
-      <div class="video-frame">
-        <img src="/images/ocean/overlay-hero.png" alt="Decorative image frame">
-      </div>
-    
-    <div class="video-media">
-      <video playsinline="" autoplay="" loop="" muted="" data-autoplay=""
-             poster="/images/ocean/ocean.png" x5-video-player-type="h5">
-        <source src="/images/ocean/ocean.mp4" type="video/mp4">
-        <source src="/images/ocean/ocean.ogv" type="video/ogg">
-        <source src="/images/ocean/ocean.webm" type="video/webm">
-        <p>Your user agent does not support the HTML5 Video element.</p>
-      </video>
-      <div class="video-overlay"></div>
-    </div>
-    <div class="video-inner text-center text-white">
-      <h1><a href="/">rhine(黎磊)</a></h1>
-      <p></p>
-      <div><img src="/images/hexo-inverted.svg" class="brand" alt="rhine(黎磊)"></div>
-    </div>
-    <div class="video-learn-more">
-      <a class="anchor" href="#landingpage"><i class="fe fe-mouse"></i></a>
-    </div>
-  </div>
-</section>
-
-<div id="landingpage">
   <section class="outer">
-  <article class="articles">
-    
-    <h1 class="page-type-title"></h1>
-
-    
-      
-        
+  
 
 <article id="post-View的绘制流程" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
@@ -66,9 +32,9 @@
       <header class="article-header">
         
   
-    <h2 itemprop="name">
-      <a class="article-title" href="/2019/10/07/View的绘制流程/">View的绘制流程</a>
-    </h2>
+    <h1 class="article-title" itemprop="name">
+      View的绘制流程
+    </h1>
   
   
 
@@ -90,6 +56,14 @@
 
       </div>
     
+
+    
+      
+    <div class="tocbot"></div>
+
+
+
+
 
     
 
@@ -234,6 +208,41 @@
   </div>
 
   
+    
+  <nav class="article-nav">
+    
+    
+      <a href="/2019/10/03/Android系列学习/" class="article-nav-link">
+        <strong class="article-nav-caption">Olde posts</strong>
+        <div class="article-nav-title">Android系列学习</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  <div class="gitalk" id="gitalk-container"></div>
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+    var gitalk = new Gitalk({
+      clientID: '7fe0aa956b684f67dc71',
+      clientSecret: '6d1c739bf59040f4fa8b09bf4bebcfa7ed9d1cea',
+      repo: 'rhine-li-lei.github.io',
+      owner: 'rhine-li-lei',
+      admin: ['rhine-li-lei'],
+      // id: location.pathname,      // Ensure uniqueness and length less than 50
+      id: md5(location.pathname),
+      distractionFreeMode: false,  // Facebook-like distraction free mode
+      pagerDirection: 'last'
+    })
+
+  gitalk.render('gitalk-container')
+  </script>
 
   
 
@@ -241,327 +250,7 @@
 
 
 
-      
-        
-
-<article id="post-Android系列学习" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2019/10/03/Android系列学习/">Android系列学习</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2019/10/03/Android系列学习/" class="article-date">
-  <time datetime="2019-10-03T13:58:01.000Z" itemprop="datePublished">2019-10-03</time>
-</a>
-        
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Android系列/">Android系列</a>
-  </div>
-
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <blockquote>
-<p>版权声明： 本站所有博文内容均为原创，转载请务必注明作者与原文链接，且不得篡改原文内容。</p>
-</blockquote>
-<h1 id="Android-系统"><a href="#Android-系统" class="headerlink" title="Android 系统"></a>Android 系统</h1><p><img src="https://upload-images.jianshu.io/upload_images/3998756-fbec9f7f3d060abd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="platform_architecture"></p>
-<p>从这张图里面我们能清楚知道每一层的作用，本博客主要在 Framework 和 Native、Android Runtime 两层作讲解。</p>
-<h2 id="Framework"><a href="#Framework" class="headerlink" title="Framework"></a>Framework</h2><p>Framework 通过使用Java语言编写的API，您可以使用Android OS的整个功能集。 这些API通过简化核心，模块化系统组件和服务的重用，构成了创建Android应用所需的构建块，其中包括：</p>
-<ul>
-<li>丰富而可扩展的View System</li>
-<li>Resource Manager</li>
-<li>Notification Manager</li>
-<li>Activity Manager</li>
-<li>Content Providers</li>
-</ul>
-<h2 id="Native-C-C-Libraries"><a href="#Native-C-C-Libraries" class="headerlink" title="Native C/C++ Libraries"></a>Native C/C++ Libraries</h2><p>许多核心的Android系统组件和服务（例如ART和HAL）都是根据需要使用C和C ++编写的本机库的本机代码构建的。 Android平台提供了Java框架API，以将某些本机库的功能公开给应用程序。 </p>
-<p>如果您要开发需要C或C ++代码的应用程序，则可以使用Android NDK直接从您的本机代码访问其中一些本机平台库。</p>
-<h2 id="Android-Runtime"><a href="#Android-Runtime" class="headerlink" title="Android Runtime"></a>Android Runtime</h2><p>对于运行Android 5.0版（API级别21）或更高版本的设备，每个应用程序都以自己的进程运行，并带有自己的Android运行时（ART）实例。 通过执行DEX文件（一种专门为Android设计的字节码格式，已针对最小的内存占用空间进行了优化），ART可以在低内存设备上运行多个虚拟机。 构建工具链（例如Jack）将Java源代码编译为DEX字节码，该代码可在Android平台上运行。</p>
-<p>对于这一部分讲解主要会停留在虚拟机概念上。</p>
-<h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><p>这是一篇立flag的文章，自己想在这两层做源码分析，这将是整个文章的目录。</p>
-<h2 id="通信方式"><a href="#通信方式" class="headerlink" title="通信方式"></a>通信方式</h2><p>Android 是基于 Linux 开发，进程间、线程间的通信必不可少，其中进程间的通信方式主要有</p>
-<ul>
-<li>文件</li>
-<li>AIDL（基于binder）</li>
-<li>Binder</li>
-<li>Messenger（基于binder）</li>
-<li>ContentProvider（基于binder）</li>
-<li>socket<br>而线程间进程通信呢，主要就是Handler，整个Android的消息机制都是建立在Handler上的。</li>
-</ul>
-<h2 id="Android-进程"><a href="#Android-进程" class="headerlink" title="Android 进程"></a>Android 进程</h2><p>Android 系统启动过程就是由Boot loader引导开机，以此进入 内核， Native，Framework，App</p>
-<h2 id="系统稳定性"><a href="#系统稳定性" class="headerlink" title="系统稳定性"></a>系统稳定性</h2><p>系统稳定性主要分为超时(timeout)和异常崩溃(crash)。</p>
-<h2 id="系统组件"><a href="#系统组件" class="headerlink" title="系统组件"></a>系统组件</h2><p>对于Android来说，最为著名的就是四大组件，Activity、Service、Broadcast Receiver、ContentProvider；这四大部分的源码对于Android工程师来说应该是最为手到擒来的了。</p>
-<h2 id="系统服务"><a href="#系统服务" class="headerlink" title="系统服务"></a>系统服务</h2><p>AMS、PMS 、WMS等系统服务作为我们最为熟知的系统服务他是怎么工作的，了解一下？</p>
-<h2 id="虚拟机"><a href="#虚拟机" class="headerlink" title="虚拟机"></a>虚拟机</h2><p>如何在 Android 平台上跑Java 代码呢？虚拟机扮演着十分重要的角色，5.0之前是 Dalvik虚拟机，之后是Android Runtime(ART)虚拟机，原理了解下？</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/03/Android系列学习/" data-id="ck1gh5m3f0000bwvz8wlndxsk"
-         class="article-share-link">Share</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Framework/">Framework</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        
-
-<article id="post-View的事件分发拦截机制" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2018/11/15/View的事件分发拦截机制/">View 的事件分发拦截机制</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2018/11/15/View的事件分发拦截机制/" class="article-date">
-  <time datetime="2018-11-15T04:01:45.000Z" itemprop="datePublished">2018-11-15</time>
-</a>
-        
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Android系列/">Android系列</a>
-  </div>
-
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <p>这一个知识点也是写烂了的，可是作为 Android 开发者又不得不学习这部分，学习了呢，总觉得要写点东西出来才觉得有感觉，得，就有这一篇文章了。</p>
-<p><strong>API 27</strong></p>
-<h2 id="流程介绍"><a href="#流程介绍" class="headerlink" title="流程介绍"></a>流程介绍</h2><p>在单点触摸中，我们对屏幕的点击，滑动，抬起等一系的动作都是由一个一个MotionEvent对象组成的触摸事件。MotionEvent 是对一个对一个事件的封装，里面包括动作、坐标等等信息，根据不同动作，主要有以下三种事件类型：</p>
-<ol>
-<li>ACTION_DOWN：手指刚接触屏幕，按下去的那一瞬间产生该事件</li>
-<li>ACTION_MOVE：手指在屏幕上移动时候产生该事件</li>
-<li>ACTION_UP：手指从屏幕上松开的瞬间产生该事件</li>
-</ol>
-<p>要要注意触摸事件不是独立的，而是成组的，每一组事件都是由按下事件开始的，由抬起事件或者取消事件结束。我们把<strong>由 ACTION_DOWN 开始（按下），ACTION_UP （抬起）或者 ACTION_CANCEL（取消） 结束</strong>的一组事件称为<strong>事件序列</strong>或者说<strong>事件流</strong>。取消事件是一种特殊的事件，它对应的是事件序列非人为的提前结束。<br>
-        
-          <a class="article-more-link" href="/2018/11/15/View的事件分发拦截机制/">Read More...</a>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/11/15/View的事件分发拦截机制/" data-id="ck1gh5m990002bwvzps9wb7a5"
-         class="article-share-link">Share</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Framework/">Framework</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        
-
-<article id="post-Android的消息机制-Handler" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2018/07/26/Android的消息机制-Handler/">Android的消息机制-Handler</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2018/07/26/Android的消息机制-Handler/" class="article-date">
-  <time datetime="2018-07-25T17:41:19.000Z" itemprop="datePublished">2018-07-26</time>
-</a>
-        
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Android系列/">Android系列</a>
-  </div>
-
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <p>为了更好的理解 Looper 的工作原理，我们需要对 ThreadLocal 进行了解，如果对 ThreadLocal 没有了解的童鞋，可以参看  <a href="https://www.jianshu.com/p/0ba78fe61c40" target="_blank" rel="noopener">ThreadLocal 原理</a></p>
-<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>  一句话原理：<strong>共享内存</strong></p>
-<p>  Handler 作为日常开发的必备，不可避免就要涉及这方面的知识。从开发者角度来说，<strong>Handler 是 Android 消息机制的上层接口</strong>，使得开发的时只需与 Handler 交互即可。Handler 使用也很简单，<strong>能够轻松将一个任务切换到 Handler 所在的线程中执行</strong>。</p>
-<p>很多人认为Handler的作用就是更新UI，的确没错，但是更新UI仅仅是Handler的一个特殊的使用场景。具体来说，就是有时候需要在子线程做一些耗时操作，比如说访问网络或者耗时的I/O操作，当这些耗时操作完成时，程序的UI进行相应的改变。由于安卓开发规范的限制，我们不能在子线程中访问UI控件，因为UI的控件是线程非安全的，这个时候通过Handler就可以将更新UI的操作切换到主线程中执行。<br>
-        
-          <a class="article-more-link" href="/2018/07/26/Android的消息机制-Handler/">Read More...</a>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/26/Android的消息机制-Handler/" data-id="ck1gh5mbm000wbwvzw4qdr5rj"
-         class="article-share-link">Share</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Framework/">Framework</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        
-
-<article id="post-ThreadLocal原理" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2018/07/24/ThreadLocal原理/">ThreadLocal 原理</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2018/07/24/ThreadLocal原理/" class="article-date">
-  <time datetime="2018-07-23T17:43:42.000Z" itemprop="datePublished">2018-07-24</time>
-</a>
-        
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Android系列/">Android系列</a>
-  </div>
-
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <h1 id="总述"><a href="#总述" class="headerlink" title="总述"></a>总述</h1><p>ThreadLocal 在面试中经常提到，关于ThreadLocal使用不当造成OOM以及在特殊场景下，通过ThreadLocal可以轻松实现一些看起来复杂的功能，都说明值得花时间研究其原理。</p>
-<p>ThreadLocal 不是 Thread，是一个<strong>线程内部的数据存储类</strong>，通过它可以在指定的线程中存储数据，<strong>对数据存储后，只有在线程中才可以获取到存储的数据，对于其他线程来说是无法获取到数据。</strong>可能这才是Local的真正含义吧。<br>
-        
-          <a class="article-more-link" href="/2018/07/24/ThreadLocal原理/">Read More...</a>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/24/ThreadLocal原理/" data-id="ck1gh5m9g0006bwvztbcgw0gv"
-         class="article-share-link">Share</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ThreadLocal/">ThreadLocal</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-  </article>
-  
-
-  
 </section>
-</div>
-
   <footer class="footer">
   <div class="outer">
     <div class="float-right">
@@ -581,8 +270,8 @@
 
 </main>
 
-  <aside class="sidebar">
-    
+<aside class="sidebar sidebar-specter">
+  
     <button class="navbar-toggle"></button>
 <nav class="navbar">
   
@@ -647,6 +336,21 @@
   <script src="/fancybox/jquery.fancybox.min.js"></script>
 
 
+
+  <script src="/js/tocbot.min.js"></script>
+  <script>
+    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+    tocbot.init({
+      tocSelector: '.tocbot',
+      contentSelector: '.article-entry',
+      headingSelector: 'h1, h2, h3, h4, h5, h6',
+      hasInnerContainers: true,
+      scrollSmooth: true,
+      positionFixedSelector: '.tocbot',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  </script>
 
 
 <script src="/js/ocean.js"></script>

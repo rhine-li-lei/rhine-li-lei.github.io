@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-10-03T13:58:29.548Z</updated>
+  <updated>2019-10-07T13:52:01.436Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>View的绘制流程</title>
+    <link href="http://yoursite.com/2019/10/07/View%E7%9A%84%E7%BB%98%E5%88%B6%E6%B5%81%E7%A8%8B/"/>
+    <id>http://yoursite.com/2019/10/07/View的绘制流程/</id>
+    <published>2019-10-07T13:51:05.000Z</published>
+    <updated>2019-10-07T13:52:01.436Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;View 的绘制流程是 Android 开发的必备知识点之一&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;API：26&lt;/strong&gt;&lt;/p&gt;
+&lt;h1 id=&quot;View-树&quot;&gt;&lt;a href=&quot;#View-树&quot; class=&quot;headerlink&quot; title=&quot;View
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Android系列" scheme="http://yoursite.com/categories/Android%E7%B3%BB%E5%88%97/"/>
+    
+    
+      <category term="Android" scheme="http://yoursite.com/tags/Android/"/>
+    
+      <category term="Framework" scheme="http://yoursite.com/tags/Framework/"/>
+    
+  </entry>
   
   <entry>
     <title>Android系列学习</title>
